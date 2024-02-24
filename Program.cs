@@ -3,6 +3,7 @@ using fakebook_asp_api.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// Dependency injection for DB configured 
 builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection("FakebookDatabase"));
 
