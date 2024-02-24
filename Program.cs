@@ -7,6 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection("FakebookDatabase"));
 
+// The Service classes are registered with DI to support construcor injection in consuming classes
+// MongoClient must be registered in DI with a singleton service lifetime
+builder.Services.AddSingleton<PostService>();
+builder.Services.AddSingleton<CommentService>();
+builder.Services.AddSingleton<UserService>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
