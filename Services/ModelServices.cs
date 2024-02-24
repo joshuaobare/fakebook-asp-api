@@ -13,7 +13,6 @@ public class PostService {
         var mongoDatabase = mongoClient.GetDatabase(databaseSettings.Value.DatabaseName);
         _postCollection = mongoDatabase.GetCollection<Post>(databaseSettings.Value.CollectionName);
     }
-
     public async Task<List<Post>> GetPostsAsync() =>
         await _postCollection.Find(_ => true).ToListAsync();
 
@@ -28,4 +27,30 @@ public class PostService {
 
     public async Task RemoveAsync(string id) =>
         await _postCollection.DeleteOneAsync(x => x.PostId == id);
+}
+
+public class CommentService
+{
+    private readonly IMongoCollection<Comment> _commentCollection;
+
+    public CommentService(IOptions<DatabaseSettings> databaseSettings)
+    {
+        var mongoClient = new MongoClient(databaseSettings.Value.MongoDBConnection);
+        var mongoDatabase = mongoClient.GetDatabase(databaseSettings.Value.DatabaseName);
+        _commentCollection = mongoDatabase.GetCollection<Comment>(databaseSettings.Value.CollectionName);
+    }
+
+    public async Task<List<Comment>> GetCommentsAsync() =>
+        await _commentCollection.Find(_ => true).ToListAsync();
+    public async Task<Comment?> GetCommentAsync(string id) =>
+        await _commentCollection.Find(x => x.CommentId == id).FirstOrDefaultAsync();
+
+    public async Task CreateAsync(Comment newComment) =>
+        await _commentCollection.InsertOneAsync(newComment);
+
+    public async Task UpdateAsync(string id, Comment updatedComment) =>
+        await _commentCollection.ReplaceOneAsync(x => x.CommentId == id, updatedComment);
+
+    public async Task RemoveAsync(string id) =>
+        await _commentCollection.DeleteOneAsync(x => x.CommentId == id);
 }
