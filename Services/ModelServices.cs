@@ -54,3 +54,30 @@ public class CommentService
     public async Task RemoveAsync(string id) =>
         await _commentCollection.DeleteOneAsync(x => x.CommentId == id);
 }
+
+public class UserService
+{
+    private readonly IMongoCollection<User> _userCollection;
+    public UserService(IOptions<DatabaseSettings> databaseSettings)
+    {
+        var mongoClient = new MongoClient(databaseSettings.Value.MongoDBConnection);
+        var mongoDatabase = mongoClient.GetDatabase(databaseSettings.Value.DatabaseName);
+        _userCollection = mongoDatabase.GetCollection<User>(databaseSettings.Value.CollectionName);
+    }
+
+    public async Task<List<User>> GetUsersAsync() =>
+        await _userCollection.Find(_ => true).ToListAsync();
+    public async Task<User?> GetUserAsync(string id) =>
+        await _userCollection.Find(x => x.UserId == id).FirstOrDefaultAsync();
+
+    public async Task CreateAsync(User newUser) =>
+        await _userCollection.InsertOneAsync(newUser);
+
+    public async Task UpdateAsync(string id, User updatedUser) =>
+        await _userCollection.ReplaceOneAsync(x => x.UserId == id, updatedUser);
+
+    public async Task RemoveAsync(string id) =>
+        await _userCollection.DeleteOneAsync(x => x.UserId == id);
+
+
+}
