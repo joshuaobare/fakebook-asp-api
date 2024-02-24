@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("fakebook-asp-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+615d60620b3f750746547d40719245bf545552dc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c2e3981d25c273f4d9bd000d508a1b412d9a1b0")]
 [assembly: System.Reflection.AssemblyProductAttribute("fakebook-asp-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("fakebook-asp-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
