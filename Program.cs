@@ -6,7 +6,18 @@ var builder = WebApplication.CreateBuilder(args);
 // Dependency injection for DB configured 
 builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection("FakebookDatabase"));
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.AllowAnyOrigin();
+                          policy.AllowAnyHeader();
+                          policy.AllowAnyMethod();
+                      });
+});
 // The Service classes are registered with DI to support construcor injection in consuming classes
 // MongoClient must be registered in DI with a singleton service lifetime
 builder.Services.AddSingleton<PostService>();
@@ -28,6 +39,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

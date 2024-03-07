@@ -5,7 +5,9 @@ namespace fakebook_asp_api.Models;
 
 public class Users{
     [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]   
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? UserId { get; set; }
+    public Boolean IsAdmin { get; set; } = false;
     public string Username { get; set; } = null!;
     public string FullName { get; set; } = null!;
     public string Email { get; set; } = null!;

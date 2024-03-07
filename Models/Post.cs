@@ -4,7 +4,8 @@ namespace fakebook_asp_api.Models;
 
 public class Post {
     [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]    
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? PostId { get; set; }
     public string UserId { get; set; } = null!;
     public string Text { get; set; } = null!;
     public DateTime Timestamp { get; set; } = DateTime.Now;
