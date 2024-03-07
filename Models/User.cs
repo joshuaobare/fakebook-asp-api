@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace fakebook_asp_api.Models;
 
-public class User{
+public class Users{
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public string? UserId { get; set; }

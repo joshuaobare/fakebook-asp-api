@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "TVkhJda2nMC6TRRdEDttPfq5XQI5VagLtdYeTiBUpdM=",
+  "Source": "fakebook-asp-api",
+  "BasePath": "_content/fakebook-asp-api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

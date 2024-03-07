@@ -42,7 +42,7 @@
           "dependencies": {
             "MongoDB.Driver": {
               "target": "Package",
-              "version": "[2.3.0, )"
+              "version": "[2.24.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

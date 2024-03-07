@@ -13,11 +13,11 @@ public class UserController : Controller {
     public UserController(UserService userService) => _userService = userService;
 
     [HttpGet]
-    public async Task<List<User>> Get() =>
+    public async Task<List<Users>> Get() =>
         await _userService.GetUsersAsync();
 
     [HttpGet("{id:length(24)}")]
-    public async Task<ActionResult<User>> Get(string id)
+    public async Task<ActionResult<Users>> Get(string id)
     {
         var user = await _userService.GetUserAsync(id);
 
@@ -29,7 +29,8 @@ public class UserController : Controller {
 
     }
 
-    public async Task<IActionResult> Post(User newUser)
+    [HttpPost]
+    public async Task<IActionResult> Post(Users newUser)
     {
         await _userService.CreateAsync(newUser);
 
@@ -37,7 +38,7 @@ public class UserController : Controller {
     }
 
     [HttpPut("{id:length(24)}")]
-    public async Task<IActionResult> Update(string id, User updatedUser)
+    public async Task<IActionResult> Update(string id, Users updatedUser)
     {
         var user = await _userService.GetUserAsync(id);
 
