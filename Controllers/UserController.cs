@@ -36,6 +36,21 @@ public class UserController : Controller {
 
         return CreatedAtAction(nameof(Get), new { id = newUser.UserId }, newUser);
     }
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(Users userData)
+    {
+        var user = await _userService.GetUserAsync(userData.UserId);
+        if (user is null)
+        {
+            return NotFound();
+        }
+        if (user.Email == userData.Email && user.Password == userData.Password)
+        {
+            return RedirectToAction("Success");
+        }
+        return RedirectToAction("Fail");
+
+    }
 
     [HttpPut("{id:length(24)}")]
     public async Task<IActionResult> Update(string id, Users updatedUser)
