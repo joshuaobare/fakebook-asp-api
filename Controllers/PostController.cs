@@ -15,7 +15,7 @@ public class PostController : Controller {
     [HttpGet]
     public async Task<List<Post>> Get() => await _postService.GetPostsAsync();
 
-    [HttpGet]
+    [HttpGet("id:length(24)")]
     public async Task<ActionResult<Post>> Get(string id) {
         var post = await _postService.GetPostAsync(id);
 
@@ -34,7 +34,7 @@ public class PostController : Controller {
         return CreatedAtAction(nameof(Get), new { id = newPost.PostId }, newPost);
     }
 
-    [HttpPut("id:length(24")]
+    [HttpPut("id:length(24)")]
     public async Task<IActionResult> Update(string id, Post updatedPost)
     {
         var post = await _postService.GetPostAsync(id);
