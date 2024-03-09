@@ -39,16 +39,17 @@ public class UserController : Controller {
     [HttpPost("login")]
     public async Task<IActionResult> Login(Users userData)
     {
-        var user = await _userService.GetUserAsync(userData.UserId);
+        
+        var user = await _userService.GetUserUsernameAsync(userData.Username);
         if (user is null)
         {
             return NotFound();
         }
-        if (user.Email == userData.Email && user.Password == userData.Password)
+        if (user.Username == userData.Username && user.Password == userData.Password)
         {
-            return RedirectToAction("Success");
+            return CreatedAtAction(nameof(Login), user); ;
         }
-        return RedirectToAction("Fail");
+        return NotFound();
 
     }
 

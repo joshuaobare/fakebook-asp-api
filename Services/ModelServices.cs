@@ -70,6 +70,9 @@ public class UserService
     public async Task<Users?> GetUserAsync(string id) =>
         await _userCollection.Find(x => x.UserId == id).FirstOrDefaultAsync();
 
+    public async Task<Users?> GetUserUsernameAsync(string username) =>
+        await _userCollection.Find(x => x.Username == username).FirstOrDefaultAsync();
+
     public async Task CreateAsync(Users newUser) =>
         await _userCollection.InsertOneAsync(newUser);
 
