@@ -7,6 +7,60 @@ namespace fakebook_asp_api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PostController : Controller
-{
+public class PostController : Controller {
+    private readonly PostService _postService;
+
+    public PostController(PostService postService) => _postService = postService;
+
+    [HttpGet]
+    public async Task<List<Post>> Get() => await _postService.GetPostsAsync();
+
+    [HttpGet]
+    public async Task<ActionResult<Post>> Get(string id) {
+        var post = await _postService.GetPostAsync(id);
+
+        if (post is null)
+        {
+            return NotFound();
+        }
+        return post;
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Post(Post newPost) 
+    {
+        await _postService.CreateAsync(post);
+
+        return CreatedAtAction(nameof(Get), new { id = newPost.PostId }, newPost);
+    }
+
+    [HttpPut("id:length(24")]
+    public async Task<IActionResult> Update(string id, Post updatedPost)
+    {
+        var post = await _postService.GetPostAsync(id);
+
+        if (post is null)
+        {
+            return NotFound();
+        }
+
+        updatedPost.PostId = post.PostId
+        await _postService.UpdateAsync(id, updatedPost);
+        return NoContent();
+
+    }
+
+    [HttpDelete("id:length(24")]
+    public async Task<IActionResult> Delete(string id)
+    {
+        var post = await _postService.GetPostAsync(id);
+
+        if (post is null)
+        {
+            return NotFound();
+        }
+
+        await _postService.RemoveAsync(id);
+        return NoContent();
+    }
 }
