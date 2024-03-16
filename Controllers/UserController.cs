@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Cryptography;
 using CryptSharp;
 
-
-
 namespace fakebook_asp_api.Controllers;
 
 [ApiController]
@@ -36,23 +34,9 @@ public class UserController : Controller {
     [HttpPost]
     public async Task<IActionResult> Post(Users newUser)
     {
-        /*
-        // generate a 128-bit salt using a secure PRNG
-        byte[] salt = new byte[128 / 8];
-        using (var rng = RandomNumberGenerator.Create())
-        {
-            rng.GetBytes(salt);
-        }
-        // derive a 256-bit subkey (use HMACSHA1 with 10,000 iterations)
-        string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-            password: newUser.Password,
-            salt: salt,
-            prf: KeyDerivationPrf.HMACSHA1,
-            iterationCount: 10000,
-            numBytesRequested: 256 / 8));
-        */
+        
         await _userService.CreateAsync(new Users { UserId = newUser.UserId, Password = Crypter.Blowfish.Crypt(newUser.Password), IsAdmin = newUser.IsAdmin, Username = newUser.Username, FullName = newUser.FullName, Email = newUser.Email , JoinedAt = newUser.JoinedAt, Avatar = newUser.Avatar, Bio = newUser.Bio, JobTitle = newUser.JobTitle, HomeLocation = newUser.HomeLocation, RelationshipStatus = newUser.RelationshipStatus, Friends = newUser.Friends, FriendRequests = newUser.FriendRequests});
-        //await _userService.CreateAsync(new Users { Password = hashed });
+        
         return CreatedAtAction(nameof(Get), new { id = newUser.UserId }, newUser);
     }
     [HttpPost("login")]
