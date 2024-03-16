@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "QpAC19eIbl7cONOdHSpaLOjshZoP9EjolOWjQt0PHRj5275Ew0DAHexNWRVkRKnvu504ab6j0bhC8wAdPM0/4Q==",
+  "dgSpecHash": "WNQM4Vlhn4PNtRT8uPE+pBG/f02cEHz/fKOGFkOPtAeEvCVC6yHMDYJwf4dGj3zChpTUFmd3nmL/uBcIrturOw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Joshua Obare\\OneDrive\\Docs\\DOTNET\\Project\\fakebook\\fakebook-asp-api\\fakebook-asp-api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Joshua Obare\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\Joshua Obare\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",
+    "C:\\Users\\Joshua Obare\\.nuget\\packages\\cryptsharpofficial\\2.1.0\\cryptsharpofficial.2.1.0.nupkg.sha512",
     "C:\\Users\\Joshua Obare\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
     "C:\\Users\\Joshua Obare\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\Joshua Obare\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\2.0.0\\microsoft.extensions.logging.abstractions.2.0.0.nupkg.sha512",
@@ -29,5 +30,16 @@
     "C:\\Users\\Joshua Obare\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
     "C:\\Users\\Joshua Obare\\.nuget\\packages\\zstdsharp.port\\0.7.3\\zstdsharp.port.0.7.3.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'CryptSharpOfficial 2.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "libraryId": "CryptSharpOfficial",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

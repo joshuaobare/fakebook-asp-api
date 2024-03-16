@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace fakebook_asp.api.Controllers;
 
 [ApiController]
-[Route("api/[controller")]
+[Route("api/[controller]")]
 public class CommentController: Controller {
     private readonly CommentService _commentService;
 
@@ -15,7 +15,7 @@ public class CommentController: Controller {
     public async Task<List<Comment>> Get() =>
         await _commentService.GetCommentsAsync();
 
-    [HttpGet("{id:length(24)")]
+    [HttpGet("{id:length(24)}")]
     public async Task<ActionResult<Comment>> Get(string id)
     {
         var comment = await _commentService.GetCommentAsync(id);

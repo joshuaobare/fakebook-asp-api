@@ -29,7 +29,7 @@ public class PostController : Controller {
     [HttpPost]
     public async Task<IActionResult> Post(Post newPost) 
     {
-        await _postService.CreateAsync(post);
+        await _postService.CreateAsync(newPost);
 
         return CreatedAtAction(nameof(Get), new { id = newPost.PostId }, newPost);
     }
@@ -44,7 +44,7 @@ public class PostController : Controller {
             return NotFound();
         }
 
-        updatedPost.PostId = post.PostId
+        updatedPost.PostId = post.PostId;
         await _postService.UpdateAsync(id, updatedPost);
         return NoContent();
 
