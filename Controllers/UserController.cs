@@ -3,6 +3,8 @@ using fakebook_asp_api.Models;
 using fakebook_asp_api.Services;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Cryptography;
+using CryptSharp;
+
 
 
 namespace fakebook_asp_api.Controllers;
@@ -34,6 +36,7 @@ public class UserController : Controller {
     [HttpPost]
     public async Task<IActionResult> Post(Users newUser)
     {
+        /*
         // generate a 128-bit salt using a secure PRNG
         byte[] salt = new byte[128 / 8];
         using (var rng = RandomNumberGenerator.Create())
@@ -47,8 +50,8 @@ public class UserController : Controller {
             prf: KeyDerivationPrf.HMACSHA1,
             iterationCount: 10000,
             numBytesRequested: 256 / 8));
-
-        await _userService.CreateAsync(new Users { UserId = newUser.UserId, Password = hashed, IsAdmin = newUser.IsAdmin, Username = newUser.Username, FullName = newUser.FullName, Email = newUser.Email , JoinedAt = newUser.JoinedAt, Avatar = newUser.Avatar, Bio = newUser.Bio, JobTitle = newUser.JobTitle, HomeLocation = newUser.HomeLocation, RelationshipStatus = newUser.RelationshipStatus, Friends = newUser.Friends, FriendRequests = newUser.FriendRequests});
+        */
+        await _userService.CreateAsync(new Users { UserId = newUser.UserId, Password = Crypter.Blowfish.Crypt(newUser.Password), IsAdmin = newUser.IsAdmin, Username = newUser.Username, FullName = newUser.FullName, Email = newUser.Email , JoinedAt = newUser.JoinedAt, Avatar = newUser.Avatar, Bio = newUser.Bio, JobTitle = newUser.JobTitle, HomeLocation = newUser.HomeLocation, RelationshipStatus = newUser.RelationshipStatus, Friends = newUser.Friends, FriendRequests = newUser.FriendRequests});
         //await _userService.CreateAsync(new Users { Password = hashed });
         return CreatedAtAction(nameof(Get), new { id = newUser.UserId }, newUser);
     }
@@ -61,7 +64,7 @@ public class UserController : Controller {
         {
             return NotFound();
         }
-        if (user.Username == userData.Username && user.Password == userData.Password)
+        if (user.Username == userData.Username && Crypter.CheckPassword(userData.Password,  user.Password))
         {
             return CreatedAtAction(nameof(Login), user); ;
         }
