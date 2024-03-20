@@ -68,7 +68,7 @@ public class UserController : Controller {
 
         updatedUser.UserId = user.UserId;
 
-        await _userService.UpdateAsync(id, updatedUser);
+        await _userService.ReplaceAsync(id, updatedUser);
 
         return NoContent();
     }
