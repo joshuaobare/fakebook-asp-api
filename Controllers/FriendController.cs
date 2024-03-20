@@ -14,13 +14,7 @@ public class FriendController : Controller
 
     public async Task<IActionResult> SendRequest(string friendId,string userId)
     {
-        var user = await _userService.GetUserAsync(friendId);
-
-        if (user is null) 
-        {
-            return NotFound();
-        }
-
+        
         var filter = Builders<Users>.Filter.Eq(user => user.UserId, friendId);
         var update = Builders<Users>.Update.Push<String>(e => e.FriendRequests, userId);
 
@@ -29,14 +23,26 @@ public class FriendController : Controller
         return NoContent();
     }
 
-    public async Task<IActionResult> DeleteRequest()
+    public async Task<IActionResult> DeleteRequest(string friendId, string userId)
     {
+        var filter = Builders<Users>.Filter.Eq(user => user.UserId, friendId);
+        var update = Builders<Users>.Update.Pull<String>(e => e.FriendRequests, userId);
 
+        await _userService.UpdateAsync(filter, update);
+
+        return NoContent();
     }
 
-    public async Task<IActionResult> AcceptRequest()
+    public async Task<IActionResult> AcceptRequest(string friendId, string userId)
     {
+        var userFilter = Builders<Users>.Filter.Eq(user => user.UserId, userId);
+        var userPullUpdate = Builders<Users>.Update.Pull<String>(e => e.FriendRequests, userId);
+        var userPushUpdate = Builders<Users>.Update.Push<String>(e => e.Friends, friendId);
+        var update = Builders<Users>.Update.Combine(userPullUpdate, userPushUpdate);
 
+        await _userService.UpdateAsync(filter, update);
+
+        return NoContent();
     }
 
     public async Task<IActionResult> RemoveFriend()
