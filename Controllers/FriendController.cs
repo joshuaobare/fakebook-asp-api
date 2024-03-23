@@ -39,7 +39,7 @@ public class FriendController : Controller
     public async Task<IActionResult> AcceptRequest(string friendId, string userId)
     {
         var userFilter = Builders<Users>.Filter.Eq(user => user.UserId, userId);
-        var userPullUpdate = Builders<Users>.Update.Pull<String>(e => e.FriendRequests, userId);
+        var userPullUpdate = Builders<Users>.Update.Pull<String>(e => e.FriendRequests, friendId);
         var userPushUpdate = Builders<Users>.Update.Push<String>(e => e.Friends, friendId);
         var update = Builders<Users>.Update.Combine(userPullUpdate, userPushUpdate);
 
