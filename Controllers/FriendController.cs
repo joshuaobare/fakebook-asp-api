@@ -12,6 +12,7 @@ public class FriendController : Controller
 
     public FriendController(UserService userService) => _userService = userService;
 
+    [HttpPut("request")]
     public async Task<IActionResult> SendRequest(string friendId,string userId)
     {
         
@@ -23,6 +24,7 @@ public class FriendController : Controller
         return NoContent();
     }
 
+    [HttpPut("deleterequest")]
     public async Task<IActionResult> DeleteRequest(string friendId, string userId)
     {
         var filter = Builders<Users>.Filter.Eq(user => user.UserId, friendId);
@@ -33,6 +35,7 @@ public class FriendController : Controller
         return NoContent();
     }
 
+    [HttpPut("friend")]
     public async Task<IActionResult> AcceptRequest(string friendId, string userId)
     {
         var userFilter = Builders<Users>.Filter.Eq(user => user.UserId, userId);
@@ -40,13 +43,24 @@ public class FriendController : Controller
         var userPushUpdate = Builders<Users>.Update.Push<String>(e => e.Friends, friendId);
         var update = Builders<Users>.Update.Combine(userPullUpdate, userPushUpdate);
 
-        await _userService.UpdateAsync(filter, update);
+        await _userService.UpdateAsync(userFilter, update);
+
+        var friendFilter = Builders<Users>.Filter.Eq(user => user.UserId, friendId);        
+        var friendUpdate = Builders<Users>.Update.Push<String>(e => e.Friends, userId);
+
+        await _userService.UpdateAsync(friendFilter, friendUpdate);
 
         return NoContent();
     }
 
-    public async Task<IActionResult> RemoveFriend()
+    [HttpPut("unfriend")]
+    public async Task<IActionResult> RemoveFriend(string friendId, string userId)
     {
+        var filter = Builders<Users>.Filter.Eq(user => user.UserId, userId);
+        var update = Builders<Users>.Update.Pull<String>(e => e.Friends, friendId);
 
+        await _userService.UpdateAsync(filter, update);
+
+        return NoContent();
     }
 }
