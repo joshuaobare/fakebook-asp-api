@@ -61,6 +61,11 @@ public class FriendController : Controller
 
         await _userService.UpdateAsync(filter, update);
 
+        filter = Builders<Users>.Filter.Eq(user => user.UserId, friendId);
+        update = Builders<Users>.Update.Pull<String>(e => e.Friends, userId);
+
+        await _userService.UpdateAsync(filter, update);
+
         return NoContent();
     }
 }
