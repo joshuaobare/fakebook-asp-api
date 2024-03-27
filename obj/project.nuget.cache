@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "WNQM4Vlhn4PNtRT8uPE+pBG/f02cEHz/fKOGFkOPtAeEvCVC6yHMDYJwf4dGj3zChpTUFmd3nmL/uBcIrturOw==",
+  "dgSpecHash": "EmqP5FoG5kTWbEWU+WCMKwz8iczBkifDMPVf7bfDXptUEQagsNnBklz2jZ8aCye/Fwxlcz6e0I3uNpDw74UjsA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Joshua Obare\\OneDrive\\Docs\\DOTNET\\Project\\fakebook\\fakebook-asp-api\\fakebook-asp-api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Joshua Obare\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\Joshua Obare\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",
+    "C:\\Users\\Joshua Obare\\.nuget\\packages\\bogus\\35.5.0\\bogus.35.5.0.nupkg.sha512",
     "C:\\Users\\Joshua Obare\\.nuget\\packages\\cryptsharpofficial\\2.1.0\\cryptsharpofficial.2.1.0.nupkg.sha512",
     "C:\\Users\\Joshua Obare\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
     "C:\\Users\\Joshua Obare\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
