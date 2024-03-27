@@ -35,7 +35,7 @@ public class UserController : Controller {
     public async Task<IActionResult> Post(Users newUser)
     {
         
-        await _userService.CreateAsync(new Users { UserId = newUser.UserId, Password = Crypter.Blowfish.Crypt(newUser.Password), IsAdmin = newUser.IsAdmin, Username = newUser.Username, FullName = newUser.FullName, Email = newUser.Email , JoinedAt = newUser.JoinedAt, Avatar = newUser.Avatar, Bio = newUser.Bio, JobTitle = newUser.JobTitle, HomeLocation = newUser.HomeLocation, RelationshipStatus = newUser.RelationshipStatus, Friends = newUser.Friends, FriendRequests = newUser.FriendRequests});
+        await _userService.CreateAsync(new Users { UserId = newUser.UserId, Password = Crypter.Blowfish.Crypt(newUser.Password), IsAdmin = newUser.IsAdmin, IsBanned = newUser.IsBanned, Username = newUser.Username, FullName = newUser.FullName, Email = newUser.Email , JoinedAt = newUser.JoinedAt, Avatar = newUser.Avatar, Bio = newUser.Bio, JobTitle = newUser.JobTitle, HomeLocation = newUser.HomeLocation, RelationshipStatus = newUser.RelationshipStatus, Friends = newUser.Friends, FriendRequests = newUser.FriendRequests});
         
         return CreatedAtAction(nameof(Get), new { id = newUser.UserId }, newUser);
     }
